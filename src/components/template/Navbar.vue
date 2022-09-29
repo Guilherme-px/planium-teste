@@ -1,10 +1,12 @@
 <template>
     <div class="nav">
-        <router-link to="/" id="logo"><span>Logo</span></router-link>
+        <div id="logo">
+            <img src="../../assets/logo-Planium-05.svg" alt="Logo" />
+        </div>
         <div class="links" v-show="!windowWidth">
             <router-link to="/"><span>Home</span></router-link>
         </div>
-        <div class="toggle">
+        <div class="toggle" v-if="windowWidth">
             <BIconList
                 class="toggle"
                 v-show="windowWidth"
@@ -58,25 +60,18 @@ export default {
 .nav {
     position: fixed;
     grid-area: nav;
-    background-color: #222;
-    border-bottom: 4px solid #111;
+    background-color: #98d7e2;
+    border-bottom: 4px solid #6aa8b3;
     padding: 20px 50px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
     z-index: 20000000000000000000;
 }
 
 #logo {
-    margin: auto;
-    margin-left: 0;
-}
-
-#logo span {
-    color: #fff;
-    font-size: 1.2em;
-    letter-spacing: 2px;
+    width: 120px;
 }
 
 .links a {
@@ -86,7 +81,7 @@ export default {
 }
 
 .links a:hover {
-    color: rgb(250, 250, 36);
+    color: #6aa8b3;
 }
 
 .toggle {
@@ -103,7 +98,7 @@ export default {
     width: 100%;
     max-width: 70%;
     height: 100%;
-    background-color: #111;
+    background-color: #98d7e2;
     top: 0;
     left: 0;
 }
@@ -117,10 +112,10 @@ export default {
 }
 
 .dropdown-nav a:hover {
-    color: rgb(250, 250, 36);
+    color: #6aa8b3;
 }
 
 .toggle:hover {
-    color: rgb(250, 250, 36);
+    color: #6aa8b3;
 }
 </style>
