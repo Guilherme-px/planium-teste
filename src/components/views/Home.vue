@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <div v-if="alertActive === true" class="toast">
+            <span>{{ this.alert }} </span>
+        </div>
         <h1>Simular plano</h1>
         <div class="form">
             <div v-if="step === 1" class="content">
@@ -54,7 +57,7 @@
 import axios from "../../server/axios";
 export default {
     namne: "Home",
-    data: function () {
+    data: () => {
         return {
             datas: {
                 beneficiaries: [{}],
@@ -64,24 +67,32 @@ export default {
             quantityInputs: 0,
             step: 1,
             plans: [],
+            alert: "",
+            alertActive: false,
         };
     },
     methods: {
+        changeAlertActive() {
+            setTimeout(() => {
+                this.alertActive = false;
+            }, 4000);
+        },
         addInputs(beneficiaries) {
             this.quantityInputs = this.datas.quantity;
-            this.step++;
             if (this.datas.quantity > 1) {
                 beneficiaries.push({});
             }
+            this.step++;
         },
         async handleSubmit() {
             await axios
                 .post("/beneficiaries", this.datas)
-                .then((res) => {
-                    console.log(res.data);
+                .then(() => {
+                    this.$router.push({ name: "Resume" });
                 })
                 .catch((e) => {
-                    console.log(e.response.data.msg);
+                    this.alert = e.response.data.msg;
+                    this.alertActive = true;
                 });
         },
         async getPlans() {
@@ -98,21 +109,25 @@ export default {
     mounted() {
         this.getPlans();
     },
+    updated() {
+        this.changeAlertActive();
+    },
 };
 </script>
 
 <style scoped>
 .container {
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     background: linear-gradient(90deg, #cedbde 35%, #98d7e2 100%);
 }
 
 h1 {
     margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .form .content {
@@ -122,7 +137,6 @@ h1 {
 
 .form {
     width: 60%;
-    margin: 2em auto 0;
     background-color: #f8f8f8;
     border-radius: 15px;
     box-shadow: 8px 9px 30px 7px rgba(0, 0, 0, 0.75);
@@ -150,6 +164,10 @@ h1 {
     outline: none;
     border: solid 1px #000;
     margin-bottom: 30px;
+}
+
+.form input[type="number"] {
+    width: 35%;
 }
 
 button {
@@ -184,5 +202,27 @@ button {
     border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 50px;
+}
+
+.toast {
+    background: red;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    position: fixed;
+    right: 0;
+    z-index: 10000000;
+    margin: 20px 40px 0 0;
+}
+
+@media (max-width: 760px) {
+    .inputs-group {
+        flex-direction: column;
+    }
+
+    .form input[type="number"] {
+        width: 80%;
+    }
 }
 </style>

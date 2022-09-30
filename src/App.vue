@@ -1,7 +1,11 @@
 <template>
     <div id="app">
-        <Navbar />
-        <router-view />
+        <div class="header">
+            <Navbar />
+        </div>
+        <div>
+            <router-view />
+        </div>
     </div>
 </template>
 
@@ -14,4 +18,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.header {
+    min-height: 10vh;
+}
+</style>

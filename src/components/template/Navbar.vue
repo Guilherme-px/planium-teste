@@ -67,7 +67,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    z-index: 20000000000000000000;
+    height: 10vh;
 }
 
 #logo {
