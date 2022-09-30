@@ -77,7 +77,7 @@ export default {
 .links a {
     padding-left: 2rem;
     font-size: 1.2rem;
-    color: #fff;
+    color: #000;
 }
 
 .links a:hover {
@@ -87,7 +87,7 @@ export default {
 .toggle {
     font-size: 2.2rem;
     display: flex;
-    color: #fff;
+    color: #000;
     cursor: pointer;
 }
 
@@ -105,7 +105,7 @@ export default {
 
 .dropdown-nav a {
     width: 100%;
-    color: #fff;
+    color: #000;
     text-align: center;
     font-size: 1.2rem;
     padding-block: 1.5rem;

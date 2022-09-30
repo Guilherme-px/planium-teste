@@ -60,7 +60,7 @@ export default {
     data: () => {
         return {
             datas: {
-                beneficiaries: [{}],
+                beneficiaries: [],
                 quantity: 0,
                 plan: "",
             },
@@ -75,12 +75,15 @@ export default {
         changeAlertActive() {
             setTimeout(() => {
                 this.alertActive = false;
-            }, 4000);
+            }, 3000);
         },
         addInputs(beneficiaries) {
             this.quantityInputs = this.datas.quantity;
+            const positions = Array(this.quantityInputs).fill({});
             if (this.datas.quantity > 1) {
-                beneficiaries.push({});
+                for (let position in positions) {
+                    beneficiaries.push({});
+                }
             }
             this.step++;
         },
@@ -210,10 +213,8 @@ button {
     border-radius: 5px;
     font-size: 1.1em;
     font-weight: bold;
-    position: fixed;
+    position: absolute;
     right: 0;
-    z-index: 10000000;
-    margin: 20px 40px 0 0;
 }
 
 @media (max-width: 760px) {
